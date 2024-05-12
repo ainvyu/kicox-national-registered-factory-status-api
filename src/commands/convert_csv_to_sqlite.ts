@@ -3,6 +3,7 @@ import { AppModule } from "../app.module";
 import { RegisteredStatusService } from "../registered-status/registered-status.service";
 import { RegisteredStatus } from "../registered-status/entities/registered-status.entity";
 const csv = require('csv-parser');
+const Iconv = require('iconv').Iconv
 import { open } from 'fs/promises';
 import * as fs from 'fs';
 
@@ -106,7 +107,9 @@ import * as fs from 'fs';
     "factoryManagementNumber": (value: string) => new Number(value).valueOf(),
   };
 
-  fs.createReadStream("data/converted_data.csv")
+
+  fs.createReadStream("data/data.csv")
+    .pipe(new Iconv('cp949', 'utf-8'))
     .pipe(
       csv({
         mapHeaders: ({ header, index }) => columnMapping[header],
