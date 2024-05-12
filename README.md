@@ -18,6 +18,15 @@ yarn run command:convert
 
 ## Running the app
 
+.env.local 파일을 생성해준다.
+```bash
+touch .env.local
+echo 'DB_NAME=kicox.db'
+```
+
+Watch 모드로 실행한다.
 ```bash
 $ yarn run start:dev
 ```
+
+http://localhost:3000/api 로 접속하면 Swagger 화면에서 테스트를 할 수 있다.
