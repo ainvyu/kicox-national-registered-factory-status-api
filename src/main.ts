@@ -11,6 +11,7 @@ function setupSwagger(app: INestApplication) {
     .setVersion('0.1')
     .addTag('test')
     .addTag('api')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

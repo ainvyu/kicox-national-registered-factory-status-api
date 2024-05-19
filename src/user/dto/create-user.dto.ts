@@ -5,6 +5,9 @@ import {
 
 export class CreateUserDto {
   @ApiProperty()
+  email: string;
+
+  @ApiProperty()
   username: string;
 
   @ApiProperty()

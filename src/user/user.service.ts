@@ -31,9 +31,9 @@ export class UserService {
     return await this.userRepository.save(newUser)
   }
 
-  async findOneByUsername(username: string) {
+  async findOneByEmail(email: string) {
     return await this.userRepository.findOne({
-      where: { username },
+      where: { email },
       relations: ['groups']
     })
   }

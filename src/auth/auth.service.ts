@@ -16,10 +16,10 @@ export class AuthService {
     private jwtService: JwtService,
   ) { }
 
-  async validateUser(username: string, password: string): Promise<Partial<User>> {
+  async validateUser(email: string, password: string): Promise<Partial<User>> {
     console.log('AuthService::validateUser');
 
-    const user: User = await this.userService.findOneByUsername(username);
+    const user: User = await this.userService.findOneByEmail(email);
 
     if (user && await bcrypt.compare(password, user.password)) {
       const { password, ...result } = user;
@@ -36,8 +36,9 @@ export class AuthService {
     return this.jwtService.sign(data)
   }
 
-  async login({ username, groups, id }: { username: string, groups: UserGroup[], id: string }) {
+  async login({ email, username, groups, id }: { email: string, username: string, groups: UserGroup[], id: string }) {
     const payload = {
+      email: email,
       username: username,
       groups: groups.map((group) => group.name),
       sub: id,

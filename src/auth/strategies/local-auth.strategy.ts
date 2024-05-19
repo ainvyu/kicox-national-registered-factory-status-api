@@ -9,7 +9,7 @@ export class AuthLocalStrategy extends PassportStrategy(Strategy, 'local') {
     private authService: AuthService,
   ) {
     super({
-      usernameField: 'username',
+      usernameField: 'email',
     });
   }
 
