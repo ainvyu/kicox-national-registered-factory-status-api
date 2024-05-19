@@ -7,6 +7,8 @@ import { SharedModule } from '../shared/shared.module';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule } from '@nestjs/config';
 import { AuthJwtStrategy } from './strategies/jwt.strategy';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guards/roles/roles.guard';
 
 @Module({
   imports: [
@@ -16,6 +18,10 @@ import { AuthJwtStrategy } from './strategies/jwt.strategy';
     ConfigModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, AuthLocalStrategy, AuthJwtStrategy]
+  providers: [
+    AuthService,
+    AuthLocalStrategy,
+    AuthJwtStrategy,
+  ]
 })
 export class AuthModule { }

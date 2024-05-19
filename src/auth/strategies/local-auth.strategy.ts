@@ -22,7 +22,7 @@ export class AuthLocalStrategy extends PassportStrategy(Strategy, 'local') {
       throw new UnauthorizedException();
     }
 
-    console.log("Validate success")
+    console.log("Validate success: %j", user)
     return user;
   }
 }

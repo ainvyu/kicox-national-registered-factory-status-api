@@ -16,11 +16,15 @@ export class AuthJwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: any) {
-    return {
+    const obj = {
       id: payload.sub,
       email: payload.email,
       username: payload.username,
       groups: payload.groups,
     };
+
+    console.log(`validate: %j`, obj)
+
+    return obj;
   }
 }
