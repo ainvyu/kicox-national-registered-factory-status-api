@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiConsumes,
@@ -22,6 +22,7 @@ import { UpdateRegisteredStatusDto } from './dto/update-registered-status.dto';
 import { PaginatedDto } from './dto/paginated.dto';
 import { RegisteredStatus } from './entities/registered-status.entity';
 import { ApiPaginatedResponse } from '../utils/decorators';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 
 export class PagingQuery {
   @IsInt()
@@ -36,16 +37,18 @@ export class PagingQuery {
 }
 
 @ApiTags('registered-status')
-
+@ApiBearerAuth()
 @Controller('registered-status')
 export class RegisteredStatusController {
   constructor(private readonly registeredStatusService: RegisteredStatusService) { }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createRegisteredStatusDto: CreateRegisteredStatusDto) {
     return this.registeredStatusService.create(createRegisteredStatusDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   @ApiPaginatedResponse(RegisteredStatus)
   async findByPaging(@Query() pageQueryParams: PagingQuery): Promise<PaginatedDto<RegisteredStatus>> {
@@ -63,11 +66,13 @@ export class RegisteredStatusController {
     } as PaginatedDto<RegisteredStatus>
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.registeredStatusService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   @ApiBody({ type: UpdateRegisteredStatusDto })
   update(
@@ -77,6 +82,7 @@ export class RegisteredStatusController {
     return this.registeredStatusService.update(id, updateRegisteredStatusDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.registeredStatusService.remove(id);
