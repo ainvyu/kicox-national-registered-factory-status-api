@@ -24,7 +24,7 @@ import { RegisteredStatus } from './entities/registered-status.entity';
 import { ApiPaginatedResponse } from '../utils/decorators';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 import { Roles } from '../auth/decorators/groups.decorator';
-import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
+import { RolesGuard } from '../auth/guards/roles/roles.guard';
 
 export class PagingQuery {
   @IsInt()
