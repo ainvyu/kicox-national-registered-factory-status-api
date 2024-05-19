@@ -21,7 +21,8 @@ yarn run command:convert
 .env.local 파일을 생성해준다.
 ```bash
 touch .env.local
-echo 'DB_NAME=kicox.db'
+echo 'DB_NAME=kicox.db' >> .env.local
+echo 'JWT_SECRET=some_secret' >> .env.local
 ```
 
 Watch 모드로 실행한다.
