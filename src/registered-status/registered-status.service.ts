@@ -27,6 +27,7 @@ export class RegisteredStatusService {
       take: size,
       skip: (page - 1) * size,
       where: {},
+      order: { "updatedAt": "DESC" }
     })
   }
 
